@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
+import newsletter
 
 from mezzanine.core.views import direct_to_template
 
@@ -17,6 +18,7 @@ urlpatterns = i18n_patterns("",
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
     ("^admin/", include(admin.site.urls)),
+    (r'^newsletter/', include('newsletter.urls')),
 )
 
 urlpatterns += patterns('',
