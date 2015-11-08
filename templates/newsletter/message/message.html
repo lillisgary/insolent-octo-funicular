@@ -1,0 +1,49 @@
+{% load url from future %}{% load thumbnail %}
+{% load pages_tags mezzanine_tags i18n future staticfiles %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>{{ newsletter.title }}: {{ message.title }}</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+<div class="row">
+<div class="col-xs-12">
+    <h1>{{ newsletter.title }}</h1>
+    <h2>{{ message.title }}</h2>
+    {% for article in message.articles.all %}
+        <h3>{{ article.title }}</h3>
+        
+        
+            <img style="margin-bottom: 2%; margin-top: 3.5%;" class="img-responsive center-block" src="http://{{ site.domain }}{{ article.image.url }}">
+
+        {% if not article.url %}
+        <div>{{ article.text|safe }}</div>
+        {% endif %}
+        
+        {% if article.url %}
+            <div>{{ article.text|safe|truncatewords:90 }}<a href="{{ article.url }}"> Read more</a></div>
+        {% endif %}
+    {% endfor %}
+    
+    <ul>
+        {% if submission.publish %}
+        <li style="margin-top: 2%;"><a href="http://{{ site.domain }}{{ submission.get_absolute_url }}">Read message online</a></li>
+        {% endif %}
+        <li><a href="http://{{ site.domain }}{% url "newsletter_unsubscribe_request" newsletter.slug %}">Unsubscribe</a></li>
+    </ul>
+</div>   
+</div>   
+</div>   
+ 
+</body>
+</html>

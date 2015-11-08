@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load pages_tags mezzanine_tags i18n future staticfiles %}
+
+{% block meta_title %}{% block title %}{% trans "Newsletter" %}{% endblock title %}{% endblock %}
+
+{% block extra_head %}
+        {% block header %}
+        {% endblock header %}
+{% endblock %}
+
+{% block main %}
+  {% block body %}
+  {% endblock body %}
+{% endblock %}
+
+
